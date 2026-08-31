@@ -284,11 +284,29 @@
                 </select>
             </div>
 
+            <!-- VULNERABILIDAD COMO DESPLEGABLE CON OPCIÓN OTRO -->
             <div class="form-group">
                 <label for="vulnerabilidad">Punto de Vulnerabilidad Identificado</label>
-                <input type="text" id="vulnerabilidad" placeholder="Ej. Portón trasero, ventana de patio, etc." required>
+                <select id="vulnerabilidad" onchange="toggleOtroVulnerabilidad()" required>
+                    <option value="">Seleccione el punto de vulnerabilidad...</option>
+                    <option value="Accesos peatonales / Controles de acceso">Accesos peatonales / Controles de acceso</option>
+                    <option value="Barda perimetral / Cerco eléctrico">Barda perimetral / Cerco eléctrico</option>
+                    <option value="Iluminación exterior">Iluminación exterior</option>
+                    <option value="Rondines de vigilancia / Patrullaje">Rondines de vigilancia / Patrullaje</option>
+                    <option value="Cámaras de circuito cerrado (CCTV)">Cámaras de circuito cerrado (CCTV)</option>
+                    <option value="Control de proveedores y repartidores">Control de proveedores y repartidores</option>
+                    <option value="Control y registro de personal">Control y registro de personal</option>
+                    <option value="Mejor Control de Acceso vehicular">Mejor Control de Acceso vehicular</option>
+                    <option value="Otro">Otro (Especificar)</option>
+                </select>
             </div>
 
+            <div class="form-group hidden" id="grupoOtroVulnerabilidad">
+                <label for="otroVulnerabilidad">Especificar Punto de Vulnerabilidad</label>
+                <input type="text" id="otroVulnerabilidad" placeholder="Describa la vulnerabilidad identificada...">
+            </div>
+
+            <!-- ÁREA DE REFUERZO DESPLEGABLE -->
             <div class="form-group"> 
                 <label for="areaRefuerzo">Área / Punto de Refuerzo Recomendado</label> 
                 <select id="areaRefuerzo" onchange="toggleOtroAreaRefuerzo()" required> 
@@ -371,6 +389,21 @@
         }
     }
 
+    function toggleOtroVulnerabilidad() {
+        const select = document.getElementById('vulnerabilidad');
+        const grupoOtro = document.getElementById('grupoOtroVulnerabilidad');
+        const inputOtro = document.getElementById('otroVulnerabilidad');
+        
+        if (select && select.value === 'Otro') {
+            grupoOtro.classList.remove('hidden');
+            inputOtro.required = true;
+        } else if (grupoOtro && inputOtro) {
+            grupoOtro.classList.add('hidden');
+            inputOtro.required = false;
+            inputOtro.value = '';
+        }
+    }
+
     function toggleOtroAreaRefuerzo() {
         const select = document.getElementById('areaRefuerzo');
         const grupoOtro = document.getElementById('grupoOtroArea');
@@ -413,6 +446,13 @@
         const alertEl = document.getElementById('vecinoAlert');
         alertEl.style.display = 'none';
 
+        // Evaluar Vulnerabilidad (Si eligió 'Otro', toma el texto del input)
+        let vulnerabilidadFinal = document.getElementById('vulnerabilidad').value;
+        if (vulnerabilidadFinal === 'Otro') {
+            vulnerabilidadFinal = document.getElementById('otroVulnerabilidad').value;
+        }
+
+        // Evaluar Área de Refuerzo (Si eligió 'Otro', toma el texto del input)
         let areaFinal = document.getElementById('areaRefuerzo').value;
         if (areaFinal === 'Otro') {
             areaFinal = document.getElementById('otroAreaRefuerzo').value;
@@ -427,7 +467,7 @@
             p_numero: document.getElementById('numero').value,
             p_objetos: document.getElementById('objetos').value,
             p_recuperados: document.getElementById('recuperados').value,
-            p_vulnerabilidad: document.getElementById('vulnerabilidad').value,
+            p_vulnerabilidad: vulnerabilidadFinal,
             p_area_refuerzo: areaFinal
         };
 
@@ -444,6 +484,7 @@
             alertEl.style.display = 'block';
 
             document.getElementById('incidenciaForm').reset();
+            toggleOtroVulnerabilidad();
             toggleOtroAreaRefuerzo();
             
             setTimeout(() => { alertEl.style.display = 'none'; }, 4000);
