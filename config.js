@@ -1,4 +1,2 @@
-const SUPABASE_URL = 'https://ydzlgbjoxmkrmvayqjou.supabase.co';
-const SUPABASE_ANON_KEY = 'PEGA_AQUI_LA_CADENA_QUE_COPIASTE';
-
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_URL = 'https://jeauvhbqrkgxrpisdlka.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplYXV2aGJxcmtneHJwaXNkbGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4NzcyMTcsImV4cCI6MjA1NjQ1MzIxN30.ydzlgbjoxmkrmvayqjou';
