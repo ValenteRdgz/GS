@@ -1,2 +1,1 @@
-const SUPABASE_URL = 'https://jeauvhbqrkgxrpisdlka.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplYXV2aGJxcmtneHJwaXNkbGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4NzcyMTcsImV4cCI6MjA1NjQ1MzIxN30.ydzlgbjoxmkrmvayqjou';
+// Archivo de configuración integrado directamente en index.html
